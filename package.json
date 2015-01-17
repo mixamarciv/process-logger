@@ -15,7 +15,7 @@
     "email": "mixamarciv@gmail.com"
   },
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
   "dependencies": {
       "iconv-lite": "*"
   }
