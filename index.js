@@ -6,7 +6,6 @@
  *  });
  *
  ****/
-var util = require('util');
 var iconv = require('iconv-lite');
 iconv.extendNodeEncodings();
 
@@ -94,6 +93,7 @@ function process_logger(p,fn) {
   });
   
   pr.on('error', function (err) {
+    var util = require('util'); 
     log.write('\nERROR: '+util.inspect(err));
   });
 
