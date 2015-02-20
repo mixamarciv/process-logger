@@ -1,6 +1,12 @@
 /****
  *  run and show process info
- *  p = {run:'test.bat',log:'file.log',args:['argument1','arg2']}
+ *  p = { run: 'test.bat',
+ *        log: 'file.log',
+ *        args: ['argument1', 'arg2'],
+ *        enc: 'cp866',
+ *        on_data: function(data){console.log(data);},
+ *        out_stream: fs.createWriteStream('out.file')
+ *      }
  *  process_logger(p,function(err,exit_code){
  *      console.log('child process exited with code ' + exit_code);
  *  });
@@ -34,6 +40,11 @@ function process_logger(p,fn) {
     pr.stdout.setEncoding(p.enc);
     pr.stderr.setEncoding(p.enc);
   }  
+  
+  if (p.out_stream) {
+      pr.stdout.pipe( p.out_stream, { end: false });
+      pr.stderr.pipe( p.out_stream, { end: false });
+  }
   
   var log = {};
   if (p.__write_log_to_file) {
